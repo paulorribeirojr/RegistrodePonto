@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro de Ponto</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-clock"></i> PontoFácil</h1>
+            <nav>
+                <ul>
+                    <li><a href="#inicio" class="active">Início</a></li>
+                    <li><a href="#registros">Registros</a></li>
+                    <li><a href="#relatorios">Relatórios</a></li>
+                    <li><a href="#cadastro">Cadastro</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h2>Sistema Simplificado de Registro de Ponto</h2>
+                <p>Gerencie os horários de entrada e saída dos funcionários de forma eficiente e prática.</p>
+                <div class="clock-container">
+                    <div id="clock"></div>
+                    <div id="date"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="registros" class="registro-ponto">
+            <div class="container">
+                <article class="card">
+                    <h2>Registrar Ponto</h2>
+                    <form id="registro-form">
+                        <div class="form-group">
+                            <label for="funcionario_id">ID do Funcionário:</label>
+                            <input type="number" id="funcionario_id" name="funcionario_id" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tipo_registro">Tipo de Registro:</label>
+                            <select id="tipo_registro" name="tipo_registro" required>
+                                <option value="">Selecione...</option>
+                                <option value="entrada">Entrada</option>
+                                <option value="saida_almoco">Saída para Almoço</option>
+                                <option value="retorno_almoco">Retorno do Almoço</option>
+                                <option value="saida">Saída</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data">Data:</label>
+                            <input type="date" id="data" name="data" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hora">Hora:</label>
+                            <input type="time" id="hora" name="hora" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacao">Observação:</label>
+                            <textarea id="observacao" name="observacao" rows="3" placeholder="Opcional: Adicione alguma observação"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Localização do Registro:</label>
+                            <div class="checkbox-group">
+                                <input type="radio" id="presencial" name="localizacao" value="presencial" checked>
+                                <label for="presencial">Presencial</label>
+                                
+                                <input type="radio" id="remoto" name="localizacao" value="remoto">
+                                <label for="remoto">Remoto</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirmar dados:</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="confirmar" name="confirmar" required>
+                                <label for="confirmar">Declaro que as informações são verdadeiras</label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Registrar</button>
+                            <button type="reset" class="btn-secondary">Limpar</button>
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </section>
+
+        <section id="relatorios" class="relatorios">
+            <div class="container">
+                <h2>Registros Recentes</h2>
+                <div class="filtro-container">
+                    <input type="text" id="busca-funcionario" placeholder="Buscar por ID do funcionário...">
+                    <button id="btn-filtrar">Filtrar</button>
+                </div>
+                <div class="tabela-container">
+                    <table id="tabela-registros">
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Nome</th>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Tipo</th>
+                                <th>Localização</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registros-tbody">
+                            <!-- Dados serão inseridos via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="loading" class="loading">Carregando dados...</div>
+                <div id="error-message" class="error-message"></div>
+            </div>
+        </section>
+
+        <section id="cadastro" class="cadastro">
+            <div class="container">
+                <article class="card">
+                    <h2>Cadastro de Funcionário</h2>
+                    <form id="cadastro-form">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cargo">Cargo:</label>
+                            <input type="text" id="cargo" name="cargo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departamento">Departamento:</label>
+                            <select id="departamento" name="departamento" required>
+                                <option value="">Selecione...</option>
+                                <option value="administrativo">Administrativo</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="rh">Recursos Humanos</option>
+                                <option value="ti">Tecnologia da Informação</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="operacoes">Operações</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data_admissao">Data de Admissão:</label>
+                            <input type="date" id="data_admissao" name="data_admissao" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Cadastrar</button>
+                            <button type="reset" class="btn-secondary">Limpar</button>
+                        </div>
+                    </form>
+                </article>
+
+                <aside class="info-card">
+                    <h3>Funcionários Cadastrados</h3>
+                    <ul id="lista-funcionarios">
+                        <!-- Lista será preenchida via JavaScript -->
+                    </ul>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>PontoFácil</h3>
+                    <p>Sistema de Registro de Ponto</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#registros">Registros</a></li>
+                        <li><a href="#relatorios">Relatórios</a></li>
+                        <li><a href="#cadastro">Cadastro</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contato">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-envelope"></i> contato@pontofacil.com</p>
+                    <p><i class="fas fa-phone"></i> (11) 1234-5678</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 PontoFácil - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
