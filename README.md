@@ -1,5 +1,3 @@
-# Controle de Ponto para Funcionários – Aplicação Web
-
 ## 📌 Sobre o Projeto
 
 Este projeto tem como objetivo criar uma aplicação web simples e funcional para gerenciar o registro de ponto dos funcionários de uma empresa.
